@@ -7,8 +7,7 @@ Sub-component value objects (Currency, enums) use BaseModel.
 
 from datetime import datetime
 from enum import Enum
-from typing import Optional, List
-from uuid import UUID
+from typing import Optional
 
 from pydantic import BaseModel, Field
 from vindicta_foundation.models.base import VindictaModel

@@ -1,6 +1,5 @@
 """Unit tests for vindicta-economy models."""
 
-import pytest
 from uuid import UUID
 from vindicta_economy.models import (
     GasTankState,
