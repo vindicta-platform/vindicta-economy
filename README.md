@@ -26,5 +26,5 @@ Coverage Mandate: ≥90%
 
 ## Docs
 
-- [Models Reference](docs/models.md)
-- [API Reference](../Vindicta-API/README.md)
+- [Architecture & Standards](https://github.com/vindicta-platform/vindicta-foundation)
+- [Economics Technical Specification](docs/index.md)
