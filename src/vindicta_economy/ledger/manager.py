@@ -1,10 +1,16 @@
-
 import asyncio
-from typing import Optional, Any
-from abc import ABC, abstractmethod
 
-from vindicta_economy.ledger.atomic_credits import AtomicLedger, ComputeCreditTransaction, AccountBalance
-from vindicta_economy.governor.quotas import ResourceQuotas, OperationType, HardwareStateProtocol, MockHardwareState
+from vindicta_economy.ledger.atomic_credits import (
+    AtomicLedger,
+    ComputeCreditTransaction,
+)
+from vindicta_economy.governor.quotas import (
+    ResourceQuotas,
+    OperationType,
+    HardwareStateProtocol,
+    MockHardwareState,
+)
+
 
 class VoidBankerManager:
     _instance = None
@@ -34,21 +40,27 @@ class VoidBankerManager:
         balance = await self.ledger.get_balance(agent_id)
         return balance >= required_cc
 
-    async def purchase_operation(self, agent_id: str, op_type: OperationType, depth: int = 1) -> bool:
+    async def purchase_operation(
+        self, agent_id: str, op_type: OperationType, depth: int = 1
+    ) -> bool:
         """
-        Attempt to purchase an operation. 
+        Attempt to purchase an operation.
         Calculates cost, checks solvency, and deducts credits if sufficient.
         Returns True if successful, False otherwise.
         """
-        cost = self.quotas.calculate_cost(op_type, hardware_state=self.hardware_state, depth=depth)
-        
+        cost = self.quotas.calculate_cost(
+            op_type, hardware_state=self.hardware_state, depth=depth
+        )
+
         # Transaction structure
         txn = ComputeCreditTransaction(
-            id=f"txn_{agent_id}_{op_type.value}_{asyncio.get_event_loop().time()}", # Simple ID generation
+            id=f"txn_{agent_id}_{op_type.value}_{asyncio.get_event_loop().time()}",  # Simple ID generation
             agent_id=agent_id,
             action_type=op_type.value,
             amount=cost,
-            metadata={"depth": depth} if op_type == OperationType.ALPHA_BETA_SEARCH else {}
+            metadata={"depth": depth}
+            if op_type == OperationType.ALPHA_BETA_SEARCH
+            else {},
         )
 
         success = await self.ledger.record_transaction(txn)
@@ -57,4 +69,3 @@ class VoidBankerManager:
     async def grant_credits(self, agent_id: str, amount: float):
         """Admin function to grant credits."""
         await self.ledger.credit_account(agent_id, amount)
-

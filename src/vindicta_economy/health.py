@@ -1,5 +1,6 @@
 import time
 
+
 def check_health() -> dict:
     """Returns the health status of the service."""
-    return {'status': 'ok', 'realm': 'vindicta-economy', 'timestamp': time.time()}
+    return {"status": "ok", "realm": "vindicta-economy", "timestamp": time.time()}

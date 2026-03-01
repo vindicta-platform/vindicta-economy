@@ -29,7 +29,9 @@ def test_transaction_type_enum_count() -> None:
 
 def test_currency_construction() -> None:
     """T170: Currency value object with all fields."""
-    curr = Currency(type=CurrencyType.PREMIUM, name="Premium Credits", symbol="PC", decimals=2)
+    curr = Currency(
+        type=CurrencyType.PREMIUM, name="Premium Credits", symbol="PC", decimals=2
+    )
     assert curr.type == CurrencyType.PREMIUM
     assert curr.name == "Premium Credits"
     assert curr.symbol == "PC"
