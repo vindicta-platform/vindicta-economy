@@ -17,6 +17,9 @@ Requires-Dist: behave>=1.2.6; extra == "dev"
 
 # Vindicta Economy
 
+> 📢 **Notice:** This repository is a Component Submodule of the Vindicta Platform Monorepo. For local development, testing, and dependency resolution, please clone the root [vindicta-platform](https://github.com/vindicta-platform/vindicta-platform) repository.
+
+
 Ledger, Quotas, and Gas Tank for the Vindicta Platform.
 
 ## Installation
