@@ -16,12 +16,14 @@ from vindicta_foundation.models.economy import GasTankState  # Re-export
 
 class CurrencyType(str, Enum):
     """Types of virtual currency."""
+
     VINDICTA_CREDITS = "vindicta_credits"
     PREMIUM = "premium"
 
 
 class TransactionType(str, Enum):
     """Types of transactions."""
+
     EARN = "earn"
     SPEND = "spend"
     TRANSFER = "transfer"
@@ -30,6 +32,7 @@ class TransactionType(str, Enum):
 
 class Currency(BaseModel):
     """Virtual currency definition (value object, no ID needed)."""
+
     type: CurrencyType
     name: str
     symbol: str = "VC"
@@ -38,6 +41,7 @@ class Currency(BaseModel):
 
 class Transaction(VindictaModel):
     """A currency transaction with full audit trail."""
+
     user_id: str
     currency: CurrencyType = CurrencyType.VINDICTA_CREDITS
     transaction_type: TransactionType
@@ -48,6 +52,7 @@ class Transaction(VindictaModel):
 
 class Balance(VindictaModel):
     """A user's currency balance."""
+
     user_id: str
     currency: CurrencyType = CurrencyType.VINDICTA_CREDITS
     amount: int = 0
@@ -55,6 +60,7 @@ class Balance(VindictaModel):
 
 class AchievementType(str, Enum):
     """Types of achievements."""
+
     GAMES_PLAYED = "games_played"
     WINS = "wins"
     STREAK = "streak"
@@ -63,6 +69,7 @@ class AchievementType(str, Enum):
 
 class Achievement(VindictaModel):
     """An unlockable achievement."""
+
     name: str
     description: str
     achievement_type: AchievementType
