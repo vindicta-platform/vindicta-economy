@@ -1,5 +1,6 @@
 """Unit tests for vindicta-economy models."""
 
+import pytest
 from uuid import UUID
 from vindicta_economy.models import (
     GasTankState,
@@ -16,7 +17,7 @@ def test_gas_tank_state_from_foundation():
     """GasTankState is re-exported from foundation."""
     tank = GasTankState(balance_usd=5.0, limit_usd=10.0)
     assert isinstance(tank, VindictaModel)
-    assert tank.balance_usd == 5.0
+    assert tank.balance_usd == pytest.approx(5.0)
     assert not tank.is_empty
 
 

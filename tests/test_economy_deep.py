@@ -2,6 +2,7 @@
 
 from datetime import datetime
 
+import pytest
 from vindicta_economy.models import (
     CurrencyType,
     TransactionType,
@@ -49,7 +50,7 @@ def test_transaction_metadata_serialization() -> None:
     )
     dumped = tx.model_dump()
     assert dumped["metadata"]["quest_id"] == "q42"
-    assert dumped["metadata"]["bonus"]["multiplier"] == 1.5
+    assert dumped["metadata"]["bonus"]["multiplier"] == pytest.approx(1.5)
 
 
 def test_transaction_json_roundtrip() -> None:
