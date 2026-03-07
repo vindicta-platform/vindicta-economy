@@ -45,12 +45,12 @@ async def _test_ledger_basics():
 
         # Check initial balance
         balance = await banker.ledger.get_balance(agent_id)
-        assert balance == 0.0
+        assert balance == pytest.approx(0.0)
 
         # Grant credits
         await banker.grant_credits(agent_id, 100.0)
         balance = await banker.ledger.get_balance(agent_id)
-        assert balance == 100.0
+        assert balance == pytest.approx(100.0)
 
         # Check solvency
         assert await banker.check_solvency(agent_id, required_cc=50.0)
@@ -71,7 +71,7 @@ async def _test_purchase_operation():
         )
         assert success
         balance = await banker.ledger.get_balance(agent_id)
-        assert balance == 9.0
+        assert balance == pytest.approx(9.0)
 
         # Purchase DMF (Cost 5.0)
         success = await banker.purchase_operation(
@@ -79,7 +79,7 @@ async def _test_purchase_operation():
         )
         assert success
         balance = await banker.ledger.get_balance(agent_id)
-        assert balance == 4.0
+        assert balance == pytest.approx(4.0)
 
         # Fail purchase (Cost 5.0 > Balance 4.0)
         success = await banker.purchase_operation(
@@ -87,7 +87,7 @@ async def _test_purchase_operation():
         )
         assert not success
         balance = await banker.ledger.get_balance(agent_id)
-        assert balance == 4.0
+        assert balance == pytest.approx(4.0)
     finally:
         await teardown_banker()
 
